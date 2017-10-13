@@ -32,6 +32,10 @@ public class Game {
     }
 
     public void dealFour() {
+        for(int i = 0; i < 4; i++)
+        {
+            this.addCardToCol(i, this.topCardPop());
+        }
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
     }
 
