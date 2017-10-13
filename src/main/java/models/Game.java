@@ -36,7 +36,7 @@ public class Game {
     }
 
     public void remove(int columnNumber) {
-        if(getTopCard(columnNumber) == NULL){
+        if(getTopCard(columnNumber) == null){
             System.out.println("Another column has a higher value");
             }
         for(int i = 0; i < 4; i++){
