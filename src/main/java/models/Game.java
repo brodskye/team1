@@ -97,6 +97,13 @@ public class Game {
 
     public void move(int columnFrom, int columnTo) {
         // remove the top card from the columnFrom column, add it to the columnTo column
+        // column must be empty to move a card, as per Aces Up rules
+        if (columnHasCards(columnFrom) && !(columnHasCards(columnTo))) {
+            Card cardToMove = getTopCard(columnFrom);
+            removeCardFromCol(columnFrom);
+            addCardToCol(columnTo, cardToMove);
+            }
+        else System.out.println("Cannot move cards into non-empty column.");
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
