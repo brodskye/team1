@@ -31,7 +31,15 @@ public class Game {
     }
 
     public void shuffle() {
-        // shuffles the deck so that it is random
+        // shuffles the deck so that it is random. random library is needed for this funtion
+        Random seeded = new Random();
+        for(int i = this.deck.size() - 1; i > 0; i--)
+        {
+            int nextIndex = seeded.nextInt(i + 1);
+            Card tempCard = this.deck.get(nextIndex);
+            this.deck.set(nextIndex, this.deck.get(i));
+            this.deck.set(i, tempCard);
+        }
     }
 
     public void dealFour() {
@@ -42,6 +50,20 @@ public class Game {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
     }
 
+    private Card topCardPop(){
+        //pulls the top card off and returns it, otherwise it throws an exception isf there aren't any cards.
+        if(this.deck.size() > 0)
+        {
+            Card outCard = this.deck.get(this.deck.size() -1);
+            this.deck.remove(this.deck.size() -1);
+            return outCard;
+        }
+        else
+        {
+            throw new RuntimeException("Deck is empty, cannot draw card.");
+        }
+
+    }
     public void remove(int columnNumber) {
         if(getTopCard(columnNumber) == null){
             System.out.println("Another column has a higher value");
