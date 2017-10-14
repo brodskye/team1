@@ -103,6 +103,7 @@ public class Game {
             removeCardFromCol(columnFrom);
             addCardToCol(columnTo, cardToMove);
             }
+        else System.out.println("Cannot move cards into non-empty column.");
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
