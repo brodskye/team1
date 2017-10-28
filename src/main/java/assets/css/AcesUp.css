@@ -62,6 +62,16 @@ color: white;
 background-color: black;
 }
 
+button:hover{
+    cursor: hand;
+    background-color: red;
+}
+
+input:hover{
+    cursor:hand;
+    background-color: red;
+}
+
 .cardLocation{
 width: 100px;
 background-color:#F0F0F0;
