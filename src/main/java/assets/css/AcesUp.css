@@ -26,6 +26,18 @@ body {
     background-size: cover;
 }
 
+div{
+    cursor: hand;
+    margin-left: 15%;
+    margin-right: 15%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid white;
+
+}
+
 table, tr, td{
     border: 1px solid white;
 }
