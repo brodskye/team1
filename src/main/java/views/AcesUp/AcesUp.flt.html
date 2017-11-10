@@ -8,8 +8,8 @@
     <div class = "statistic">
         <strong>Game Stats:</strong>
         <BR>
-            <em class="totalPoints">Total Points: </em>
-            <em class="cardsLeft">Cards Left: </em>
+            <em class="totalPointscl" id = "pointsid" >Total Points: </em>
+            <em class="cardsLeftcl" id = "cardsLeftid" >Cards Left: </em>
         <!--<em class="totalMoves">Total Moves: </em>-->
     </div>
 <div class="table">
@@ -20,7 +20,6 @@
             <td >Column2</td>
             <td >Column3</td>
         </tr>
-
         <tr><td class="columnOfCards" id="c0">
             <table>
                 <tr><td class="cardLocation l0"></td></tr>
@@ -105,30 +104,43 @@
 <script>
 
 var game;
+var totalPoints = 0; // WARNING! must be explicitly declared, ie: var totalponts; does not work as an int
+var totalCards = 48; // not 52 because for some reason the first set of 4 doesn't subtract
+var checkAfter = 0;
 
 function display(game) {
 console.log(game);
 
+    var check = 0;
 $( '.columnOfCards .cardLocation' ).html("");
-
-    $.each(game.cols[0], function( key, val ) {
+ $.each(game.cols[0], function( key, val ) {
         $( '#c0 .l'+key ).html(val.value + val.suit);
-    });
+            check++;
+        });
 
  $.each(game.cols[1], function( key, val ) {
         $( '#c1 .l'+key ).html(val.value + val.suit);
-    });
+            check++;
+        });
 
  $.each(game.cols[2], function( key, val ) {
         $( '#c2 .l'+key ).html(val.value + val.suit);
-    });
+            check++;
+        });
 
  $.each(game.cols[3], function( key, val ) {
         $( '#c3 .l'+key ).html(val.value + val.suit);
-    });
+            check++; //checks each of the written columns and then adds to a number
+        });
 
+        if (checkAfter > check){ // checks if the previous state is more the current state
+            totalPoints = totalPoints + (checkAfter - check); // if so, add the difference
+        }
+    checkAfter = check;
 
+ $('#pointsid').html("Total Points:" + totalPoints); // prints out to points id the total points
 
+ $('#cardsLeftid').html("Cards Left: " + totalCards); // prints out to cardsleftid the totalcards
 }
 
 // Calls ApplicationController.gameGet()
@@ -144,6 +156,7 @@ $.ajax({
   url: "/dealGame",
   data: JSON.stringify(game),
   success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+        totalCards = totalCards - 4; // subtract from total cards
         game = data;
         display(data);},
   contentType:"application/json; charset=utf-8",
@@ -153,11 +166,13 @@ $.ajax({
 
 
 function removeCard(colNumber){
+$('#pointsid').html(totalPoints);
 $.ajax({
 type: "POST",
 url: "/removeCard/"+colNumber,
 data: JSON.stringify(game),
 success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+
 game = data;
 display(data);},
 contentType:"application/json; charset=utf-8",
