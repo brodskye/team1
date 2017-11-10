@@ -26,6 +26,10 @@ body {
     background-size: cover;
 }
 
+input{
+    width: 20px;
+}
+
 div{
     cursor: hand;
     margin-left: 15%;
@@ -35,7 +39,11 @@ div{
     text-align: center;
     overflow: hidden;
     border: 1px solid white;
+    padding: 7px;
+}
 
+em{
+    color: #d95a48;
 }
 
 table, tr, td{
@@ -62,10 +70,10 @@ text{
 }
 
 td{
-position: center;
-width:100px;
-height:20px;
-text-align:center;
+    position: center;
+    width:100px;
+    height:27px;
+    text-align:center;
 }
 
 .title{
@@ -76,12 +84,12 @@ background-color: black;
 
 button:hover{
     cursor: hand;
-    background-color: red;
+    background-color: cyan;
 }
 
 input:hover{
     cursor:hand;
-    background-color: red;
+    background-color: cyan;
 }
 
 .cardLocation{
