@@ -100,9 +100,12 @@ public class Game {
         // column must be empty to move a card, as per Aces Up rules
         if (columnHasCards(columnFrom) && !(columnHasCards(columnTo))) {
             Card cardToMove = getTopCard(columnFrom);
-            removeCardFromCol(columnFrom);
-            addCardToCol(columnTo, cardToMove);
+            if(cardToMove.getValue() == 14){
+                removeCardFromCol(columnFrom);
+                addCardToCol(columnTo, cardToMove);
             }
+            else System.out.println("Cannot move non-aces into empty column");
+        }
         else System.out.println("Cannot move cards into non-empty column.");
     }
 
