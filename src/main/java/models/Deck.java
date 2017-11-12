@@ -1,40 +1,51 @@
-public class Deck extends Card
+package models;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+
+public class Deck
 {
     public java.util.List<Card> deck = new ArrayList<>();
-    private int deckSize = 0;
 
-    public void reateRegularDeck() //doesn't need to check for NULL because Java takes care of object lifecycle
-    {
-        this.deckSize = 52;
-        this.cards = new Card[52];
-        for (int i = 0; i < 4; i++) //Create a card and add it to the deck 
-        {
-            for(int j = 2; j < 15; j++)
-            Card newCard = new Card(j, i);
-                        //13 * i accounts for all the ranks in each suit
-                        //j - 2 accounts for 2 as the starting card rank
-            this.cards[(13 * i) + (j - 2)] = newCard; //places it in the array 
+    public Deck(){
+
+    }
+
+    public void buildDeck() {
+        for(int i = 2; i < 15; i++){
+            deck.add(new Card(i,Suit.Clubs));
+            deck.add(new Card(i,Suit.Hearts));
+            deck.add(new Card(i,Suit.Diamonds));
+            deck.add(new Card(i,Suit.Spades));
         }
     }
-    public void shuffleCards()
-    { //should work for any size deck
+
+    public void shuffle() {
+        // shuffles the deck so that it is random. random library is needed for this funtion
         Random seeded = new Random();
-        for(int i = cards.length - 1; i > 0; i--)
+        for(int i = this.deck.size() - 1; i > 0; i--)
         {
             int nextIndex = seeded.nextInt(i + 1);
-            Card tempCard = cards[nextIndex];
-            cards[nextIndex] = cards[i];
-            cards[i] = tempCard;
+            Card tempCard = this.deck.get(nextIndex);
+            this.deck.set(nextIndex, this.deck.get(i));
+            this.deck.set(i, tempCard);
         }
     }
-    public Card drawCard()
-    {
-        if(deckSize <= 0)
-            return NULL;
-        
-        Card tempCard = this.cards(deckSize - 1);
-        this.cards(deckSize - 1) = NULL;
-        this.deckSize--;
-        return tempCard;
+
+    public Card drawCard(){
+        //pulls the top card off and returns it, otherwise it throws an exception isf there aren't any cards.
+        if(this.deck.size() > 0)
+        {
+            Card outCard = this.deck.get(this.deck.size() -1);
+            this.deck.remove(this.deck.size() -1);
+            return outCard;
+        }
+        return null;
     }
+
+    public void addCard(Card newCard){
+        deck.add(newCard);
+    }
+
 }
