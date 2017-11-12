@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Discard {
+    public Discard(){
+    }
     public java.util.List<Card> discard = new ArrayList<>();
 
     public void addCard(Card newCard){

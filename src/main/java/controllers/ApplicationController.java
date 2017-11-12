@@ -33,28 +33,28 @@ public class ApplicationController {
     
     public Result gameGet(){
         Game g = new Game();
-        g.deck.buildDeck();
-        g.deck.shuffle();
+        g.buildDeck();
+        g.shuffle();
         g.dealFour();
 
-        return Results.json().render(g);
+        return Results.json().render(g.board);
     }
 
     public Result dealPost(Context context, Game g) {
         if(context.getRequestPath().contains("deal")){
             g.dealFour();
         }
-        return Results.json().render(g);
+        return Results.json().render(g.board);
     }
 
     public Result removeCard(Context context, @PathParam("column") int colNumber, Game g){
-        g.board.remove(colNumber);
-        return Results.json().render(g);
+        g.remove(colNumber);
+        return Results.json().render(g.board);
     }
 
     public Result moveCard(Context context, @PathParam("columnFrom") int colFrom, @PathParam("columnTo") int colTo, Game g){
-        g.board.move(colFrom,colTo);
-        return Results.json().render(g);
+        g.move(colFrom,colTo);
+        return Results.json().render(g.board);
     }
 
 }
