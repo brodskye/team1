@@ -9,61 +9,25 @@ import java.util.Random;
  */
 public class Game {
 
-    public java.util.List<Card> deck = new ArrayList<>();
-
+    public Deck deck;
     public java.util.List<java.util.List<Card>> cols = new ArrayList<>(4);
 
-
     public Game(){
-        // initialize a new game such that each column can store cards
+        deck = new Deck();
         for (int i = 0; i < 4; i++) {
             cols.add(new ArrayList<Card>(13));
         }
     }
 
-    public void buildDeck() {
-        for(int i = 2; i < 15; i++){
-            deck.add(new Card(i,Suit.Clubs));
-            deck.add(new Card(i,Suit.Hearts));
-            deck.add(new Card(i,Suit.Diamonds));
-            deck.add(new Card(i,Suit.Spades));
-        }
+    public boolean columnHasCards(int columnNumber) {
+        // check indicated column for number of cards; if no cards return false, otherwise return true
+        return this.cols.get(columnNumber).size() != 0;
     }
 
-    public void shuffle() {
-        // shuffles the deck so that it is random. random library is needed for this funtion
-        Random seeded = new Random();
-        for(int i = this.deck.size() - 1; i > 0; i--)
-        {
-            int nextIndex = seeded.nextInt(i + 1);
-            Card tempCard = this.deck.get(nextIndex);
-            this.deck.set(nextIndex, this.deck.get(i));
-            this.deck.set(i, tempCard);
-        }
+    public Card getTopCard(int columnNumber) {
+        return this.cols.get(columnNumber).get(this.cols.get(columnNumber).size()-1);
     }
 
-    public void dealFour() {
-        for(int i = 0; i < 4; i++)
-        {
-            this.addCardToCol(i, this.topCardPop());
-        }
-        // remove the top card from the deck and add it to a column; repeat for each of the four columns
-    }
-
-    private Card topCardPop(){
-        //pulls the top card off and returns it, otherwise it throws an exception isf there aren't any cards.
-        if(this.deck.size() > 0)
-        {
-            Card outCard = this.deck.get(this.deck.size() -1);
-            this.deck.remove(this.deck.size() -1);
-            return outCard;
-        }
-        else
-        {
-            throw new RuntimeException("Deck is empty, cannot draw card.");
-        }
-
-    }
     public void remove(int columnNumber) {
         if (columnHasCards(columnNumber)) {
             Card c = getTopCard(columnNumber);
@@ -85,18 +49,7 @@ public class Game {
             }
         } else {
             return;
-        }
     }
-
-    private boolean columnHasCards(int columnNumber) {
-        // check indicated column for number of cards; if no cards return false, otherwise return true
-        return this.cols.get(columnNumber).size() != 0;
-    }
-
-    private Card getTopCard(int columnNumber) {
-        return this.cols.get(columnNumber).get(this.cols.get(columnNumber).size()-1);
-    }
-
 
     public void move(int columnFrom, int columnTo) {
         // remove the top card from the columnFrom column, add it to the columnTo column
@@ -112,11 +65,19 @@ public class Game {
         else System.out.println("Cannot move cards into non-empty column.");
     }
 
-    private void addCardToCol(int columnTo, Card cardToMove) {
+    public void addCardToCol(int columnTo, Card cardToMove) {
         cols.get(columnTo).add(cardToMove);
     }
 
-    private void removeCardFromCol(int colFrom) {
+    public void removeCardFromCol(int colFrom) {
         this.cols.get(colFrom).remove(this.cols.get(colFrom).size()-1);
+    }
+
+    public void dealFour() {
+        for(int i = 0; i < 4; i++)
+        {
+            cols.get(i).add(deck.drawCard());
+        }
+        // remove the top card from the deck and add it to a column; repeat for each of the four columns
     }
 }
