@@ -12,7 +12,8 @@ public class Game {
     public Deck deck;
     public java.util.List<java.util.List<Card>> cols = new ArrayList<>(4);
 
-    public Board(){
+    public Game(){
+        deck = new Deck();
         for (int i = 0; i < 4; i++) {
             cols.add(new ArrayList<Card>(13));
         }
@@ -70,7 +71,7 @@ public class Game {
     public void dealFour() {
         for(int i = 0; i < 4; i++)
         {
-            cols.addCardToCol(i, deck.drawCard());
+            cols.get(i).add(deck.drawCard());
         }
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
     }
