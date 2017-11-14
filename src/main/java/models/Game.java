@@ -65,24 +65,27 @@ public class Game {
 
     }
     public void remove(int columnNumber) {
-        if(getTopCard(columnNumber) == null){
-            System.out.println("Another column has a higher value");
-            }
-        for(int i = 0; i < 4; i++){
-            int checkOtherColumn = ((i+1)%4);
-            if(getTopCard(columnNumber).getSuit() == getTopCard(checkOtherColumn).getSuit()){
-                if(getTopCard(columnNumber).getValue() < getTopCard(checkOtherColumn).getValue()){
-                    this.removeCardFromCol(i);
-                    }
-                else{
-                    System.out.println("Another column has a higher value");
+        if (columnHasCards(columnNumber)) {
+            Card c = getTopCard(columnNumber);
+            boolean removeCard = false;
+            for (int i = 0; i < 4; i++) {
+                if (i != columnNumber) {
+                    if (columnHasCards(i)) {
+                        Card compare = getTopCard(i);
+                        if (compare.getSuit() == c.getSuit()) {
+                            if (compare.getValue() > c.getValue()) {
+                                removeCard = true;
+                            }
+                        }
                     }
                 }
-                else{
-                    System.out.println("No other columns have the same suit");
-                    }
             }
-        // remove the top card from the indicated column
+            if (removeCard) {
+                this.cols.get(columnNumber).remove(this.cols.get(columnNumber).size() - 1);
+            }
+        } else {
+            return;
+        }
     }
 
     private boolean columnHasCards(int columnNumber) {
