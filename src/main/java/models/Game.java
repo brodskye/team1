@@ -49,7 +49,6 @@ public class Game {
             }
         } else {
             return;
-        }
     }
 
     public void move(int columnFrom, int columnTo) {
