@@ -46,12 +46,12 @@ public class ApplicationController {
         return Results.json().render(g);
     }
 
-    public Result myGameType(Context context, @PathParam("gameType") int gameType, Game g){
-        Game g = new Game();
-        g.deck.buildDeck(gameType);
-        g.deck.shuffle();
-        g.dealFour();
-        return Results.json().render(g);
+    public Result myGameType(Context context, @PathParam("gameType") int gameType, Game s){
+       // Game g = new Game();
+        s.deck.buildDeck(gameType);
+        s.deck.shuffle();
+        s.dealFour();
+        return Results.json().render(s);
     }
 
     public Result removeCard(Context context, @PathParam("column") int colNumber, Game g){
