@@ -49,7 +49,8 @@ public class Game {
             }
         } else {
             return;
-    }
+          }
+    }    
 
     public void move(int columnFrom, int columnTo) {
         // remove the top card from the columnFrom column, add it to the columnTo column
