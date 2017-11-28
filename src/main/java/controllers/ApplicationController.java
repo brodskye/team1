@@ -33,10 +33,9 @@ public class ApplicationController {
     
     public Result gameGet(){
         Game g = new Game();
-        g.deck.buildDeck();
+        g.deck.buildDeck(0);
         g.deck.shuffle();
         g.dealFour();
-
         return Results.json().render(g);
     }
 
@@ -44,6 +43,14 @@ public class ApplicationController {
         if(context.getRequestPath().contains("deal")){
             g.dealFour();
         }
+        return Results.json().render(g);
+    }
+
+    public Result myGameType(Context context, @PathParam("gameType") int gameType, Game g){
+        Game g = new Game();
+        g.deck.buildDeck(gameType);
+        g.deck.shuffle();
+        g.dealFour();
         return Results.json().render(g);
     }
 
