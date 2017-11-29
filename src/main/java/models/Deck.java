@@ -45,6 +45,7 @@ public class Deck
         }
     }
 
+    //we might want to rethink this function. currently if a deck is empty it ends up passing a null value card into the columns
     public Card drawCard(){
         //pulls the top card off and returns it, otherwise it throws an exception isf there aren't any cards.
         if(this.deck.size() > 0)
