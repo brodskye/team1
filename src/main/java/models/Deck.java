@@ -27,6 +27,7 @@ public class Deck
                 deck.add(new Card(i, Suit.Copas));
                 deck.add(new Card(i, Suit.Espadas));
             }
+            //changed suit.wild to suit.comodines, since that is the spanish version of the word
             deck.add(new Card(14, Suit.Comodines));
             deck.add(new Card(14, Suit.Comodines));
         }
