@@ -27,8 +27,8 @@ public class Deck
                 deck.add(new Card(i, Suit.Copas));
                 deck.add(new Card(i, Suit.Espadas));
             }
-            deck.add(new Card(14, Suit.Wild));
-            deck.add(new Card(14, Suit.Wild));
+            deck.add(new Card(14, Suit.Comodines));
+            deck.add(new Card(14, Suit.Comodines));
         }
     }
 
