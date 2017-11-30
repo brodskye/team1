@@ -57,11 +57,11 @@ public class Game {
         // column must be empty to move a card, as per Aces Up rules
         if (columnHasCards(columnFrom) && !(columnHasCards(columnTo))) {
             Card cardToMove = getTopCard(columnFrom);
-            if(cardToMove.getValue() == 14){
+          //  if(cardToMove.getValue() == 14){
                 removeCardFromCol(columnFrom);
                 addCardToCol(columnTo, cardToMove);
-            }
-            else System.out.println("Cannot move non-aces into empty column");
+           // }
+       //     else System.out.println("Cannot move non-aces into empty column");
         }
         else System.out.println("Cannot move cards into non-empty column.");
     }
@@ -75,10 +75,15 @@ public class Game {
     }
 
     public void dealFour() {
-        for(int i = 0; i < 4; i++)
-        {
-            cols.get(i).add(deck.drawCard());
+        if (deck.deckHasCards() >= 4) {
+           for(int i = 0; i < 4; i++)
+           {   cols.get(i).add(deck.drawCard());
+           }
         }
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
+        if (deck.deckHasCards() == 2)
+        {  cols.get(0).add(deck.drawCard());
+           cols.get(1).add(deck.drawCard());
+        }
     }
 }
