@@ -8,6 +8,10 @@ h1{
     position: center;
     text-align: center;
     overflow: hidden;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 body {
