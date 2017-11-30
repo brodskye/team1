@@ -1,13 +1,21 @@
-<h1><button onClick="history.go(0)">New Game</button>
-    * Aces Up *
-    <button onclick="window.open('http://www.lenagames.com/bp_files/rul/aces-up.htm', '_blank')">Rules: Aces Up</button>
-</h1>
+
 <link href="/assets/css/AcesUp.css" rel="stylesheet">
 <script type="text/javascript" src="/assets/webjars/jquery/2.1.3/jquery.js"></script>
+
 <body>
     <div class = "statistic">
-        <strong>Game Stats:</strong>
-        <BR>
+        <h1>
+            <button onClick="history.go(0)">New Normal Game</button>
+            *Aces Up*
+            <!--   <button onclick="window.open('http://www.lenagames.com/bp_files/rul/aces-up.htm', '_blank')">Rules: Aces Up</button>
+               -->
+            <button id="gameTypeS">New Spanish Game</button>
+        </h1>
+
+
+        <em>Game Stats:</em>
+
+
             <em class="totalPointscl" id = "pointsid" >Total Points: </em>
             <em class="cardsLeftcl" id = "cardsLeftid" >Cards Left: </em>
         <!--<em class="totalMoves">Total Moves: </em>-->
@@ -156,7 +164,12 @@ $.ajax({
   url: "/dealGame",
   data: JSON.stringify(game),
   success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-        totalCards = totalCards - 4; // subtract from total cards
+        if(totalCards > 2) {
+            totalCards = totalCards - 4;
+        } // subtract from total cards
+        if(totalCards === 2) {
+            totalCards = totalCards -2;
+        }
         game = data;
         display(data);},
   contentType:"application/json; charset=utf-8",
@@ -183,6 +196,9 @@ $("#gameTypeN").click(function(){
 });
 $("#gameTypeS").click(function(){
     gameTypeFunc(1);
+    totalCards = 46;
+    totalPoints = 0;
+    checkAfter = 0;
 });
 
 function removeCard(colNumber){
