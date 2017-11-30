@@ -12,12 +12,24 @@ public class Deck
 
     }
 
-    public void buildDeck() {
-        for(int i = 2; i < 15; i++){
-            deck.add(new Card(i,Suit.Clubs));
-            deck.add(new Card(i,Suit.Hearts));
-            deck.add(new Card(i,Suit.Diamonds));
-            deck.add(new Card(i,Suit.Spades));
+    public void buildDeck(int gameType) {
+        if (gameType == 0) {
+            for (int i = 2; i < 15; i++) {
+                deck.add(new Card(i, Suit.Clubs));
+                deck.add(new Card(i, Suit.Hearts));
+                deck.add(new Card(i, Suit.Diamonds));
+                deck.add(new Card(i, Suit.Spades));
+            }
+        } else {
+            for (int i = 2; i < 14; i++) {
+                deck.add(new Card(i, Suit.Bastos));
+                deck.add(new Card(i, Suit.Oros));
+                deck.add(new Card(i, Suit.Copas));
+                deck.add(new Card(i, Suit.Espadas));
+            }
+            //changed suit.wild to suit.comodines, since that is the spanish version of the word
+            deck.add(new Card(14, Suit.Comodines));
+            deck.add(new Card(14, Suit.Comodines));
         }
     }
 
@@ -33,6 +45,7 @@ public class Deck
         }
     }
 
+    //we might want to rethink this function. currently if a deck is empty it ends up passing a null value card into the columns
     public Card drawCard(){
         //pulls the top card off and returns it, otherwise it throws an exception isf there aren't any cards.
         if(this.deck.size() > 0)

@@ -165,6 +165,26 @@ $.ajax({
 });
 
 
+function gameTypeFunc(type){
+    $.ajax({
+        type: "POST",
+        url: "/myGameType/"+type,
+        date: JSON.stringify(game),
+        success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+            game = data;
+            display(data);},
+        contentType:"application/json; charset=utf-8",
+        dataType:"json",
+    });
+}
+
+$("#gameTypeN").click(function(){
+    gameTypeFunc(0);
+});
+$("#gameTypeS").click(function(){
+    gameTypeFunc(1);
+});
+
 function removeCard(colNumber){
 $.ajax({
 type: "POST",
