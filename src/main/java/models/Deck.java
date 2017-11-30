@@ -45,6 +45,11 @@ public class Deck
         }
     }
 
+    public int deckHasCards() {
+        // returns the number of values held in deck array (# of cards in deck)
+        return this.deck.size();
+    }
+    
     //we might want to rethink this function. currently if a deck is empty it ends up passing a null value card into the columns
     public Card drawCard(){
         //pulls the top card off and returns it, otherwise it throws an exception isf there aren't any cards.
