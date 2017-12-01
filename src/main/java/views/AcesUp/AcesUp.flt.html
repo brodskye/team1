@@ -107,7 +107,7 @@ var game;
 var totalPoints = 0; // WARNING! must be explicitly declared, ie: var totalponts; does not work as an int
 var totalCards = 48; // not 52 because for some reason the first set of 4 doesn't subtract
 var checkAfter = 0;
-
+var gameMode;
 function display(game) {
 console.log(game);
 
@@ -135,6 +135,10 @@ $( '.columnOfCards .cardLocation' ).html("");
 
         if (checkAfter > check){ // checks if the previous state is more the current state
             totalPoints = totalPoints + (checkAfter - check); // if so, add the difference
+            if(gameMode == 1 && totalPoints == 46) //Spanish deck win
+                endGame();
+            else if(gameMode == 0 && totalPoints == 48) //Normal deck win
+                endGame();
         }
     checkAfter = check;
 
@@ -179,9 +183,11 @@ function gameTypeFunc(type){
 }
 
 $("#gameTypeN").click(function(){
+    gameMode = 0;
     gameTypeFunc(0);
 });
 $("#gameTypeS").click(function(){
+    gameMode = 1;
     gameTypeFunc(1);
 });
 
@@ -230,6 +236,10 @@ $.ajax({
 });
 });
 
+function endGame(){
+    //load new html page here
+    window.location.href = "AcesUpWin.html";
+}
 
 </script>
 
